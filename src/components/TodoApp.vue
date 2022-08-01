@@ -61,7 +61,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "TodoApp",
   props: {
     msg: String,
   },
@@ -71,20 +71,7 @@ export default {
       editedTask: null,
       statuses: ["to-do", "in-progress", "finished"],
 
-      tasks: [
-        {
-          name: "Steal beer from the Spätverkauf.",
-          status: "to-do",
-        },
-        {
-          name: "Iss 2 Schweine in nur 1 Stunde",
-          status: "in-progress",
-        },
-        {
-          name: "Wieder nichts sinnvolles",
-          status: "finished",
-        },
-      ],
+      tasks: [],
     };
   },
   methods: {
@@ -119,6 +106,20 @@ export default {
         });
       }
       this.task = "";
+    },
+  },
+  mounted() {
+    console.log("mounted");
+    if (localStorage.getItem("tasks"))
+      this.tasks = JSON.parse(localStorage.getItem("tasks"));
+  },
+  watch: {
+    tasks: {
+      handler() {
+        console.log("changed");
+        localStorage.setItem("tasks", JSON.stringify(this.tasks));
+      },
+      deep: true,
     },
   },
 };
