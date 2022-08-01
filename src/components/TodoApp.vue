@@ -1,9 +1,7 @@
 <template>
   <div class="container" style="max-width: 600px">
-    <!-- Heading -->
     <h2 class="text-center mt-5">My Vue Todo App</h2>
 
-    <!-- Input -->
     <div class="d-flex mt-5">
       <input
         type="text"
@@ -16,7 +14,6 @@
       </button>
     </div>
 
-    <!-- Task table -->
     <table class="table table-bordered mt-5">
       <thead>
         <tr>
@@ -73,62 +70,49 @@ export default {
       task: "",
       editedTask: null,
       statuses: ["to-do", "in-progress", "finished"],
-      /* Status could be: 'to-do' / 'in-progress' / 'finished' */
+
       tasks: [
         {
-          name: "Steal bananas from the supermarket.",
+          name: "Steal beer from the Spätverkauf.",
           status: "to-do",
         },
         {
-          name: "Eat 1 kg chocolate in 1 hour.",
+          name: "Iss 2 Schweine in nur 1 Stunde",
           status: "in-progress",
         },
         {
-          name: "Create YouTube video.",
+          name: "Wieder nichts sinnvolles",
           status: "finished",
         },
       ],
     };
   },
   methods: {
-    /**
-     * Capitalize first character
-     */
     capitalizeFirstChar(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
     },
-    /**
-     * Change status of task by index
-     */
+
     changeStatus(index) {
       let newIndex = this.statuses.indexOf(this.tasks[index].status);
       if (++newIndex > 2) newIndex = 0;
       this.tasks[index].status = this.statuses[newIndex];
     },
-    /**
-     * Deletes task by index
-     */
+
     deleteTask(index) {
       this.tasks.splice(index, 1);
     },
-    /**
-     * Edit task
-     */
+
     editTask(index) {
       this.task = this.tasks[index].name;
       this.editedTask = index;
     },
-    /**
-     * Add / Update task
-     */
+
     submitTask() {
       if (this.task.length === 0) return;
-      /* We need to update the task */
       if (this.editedTask != null) {
         this.tasks[this.editedTask].name = this.task;
         this.editedTask = null;
       } else {
-        /* We need to add new task */
         this.tasks.push({
           name: this.task,
           status: "todo",
@@ -143,15 +127,6 @@ export default {
 <style scoped>
 .pointer {
   cursor: pointer;
-}
-.noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
 }
 .line-through {
   text-decoration: line-through;
