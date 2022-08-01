@@ -109,14 +109,12 @@ export default {
     },
   },
   mounted() {
-    console.log("mounted");
     if (localStorage.getItem("tasks"))
       this.tasks = JSON.parse(localStorage.getItem("tasks"));
   },
   watch: {
     tasks: {
       handler() {
-        console.log("changed");
         localStorage.setItem("tasks", JSON.stringify(this.tasks));
       },
       deep: true,
